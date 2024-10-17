@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Email from '@/Components/Mail/Email'
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <Email />
+    </div>
   )
 }
 
