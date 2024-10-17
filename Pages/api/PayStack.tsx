@@ -5,13 +5,14 @@ export default async function handler(req:any, res:any) {
   if (req.method === 'POST') {
     const { email, amount, firstName, phoneNumber } = req.body;
 
+    const security = 'sk_test_a9f0fe6f2caaa5324a2c7d8f3776b4a252d28e47'
     try {
       // Make the API call to Paystack to initialize the transaction
       const response = await axios({
         method: 'POST',
         url: 'https://api.paystack.co/transaction/initialize',
         headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECURITY_KEY}`,
+          Authorization: `Bearer ${security}`,
           'Content-Type': 'application/json',
         },
         data: {
