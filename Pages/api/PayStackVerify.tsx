@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res:NextApiResponse) 
         method: 'GET',
         url: `https://api.paystack.co/transaction/verify/${reference}`,
         headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECURITY_KEY}`,
+          Authorization: `Bearer sk_test_a9f0fe6f2caaa5324a2c7d8f3776b4a252d28e47`,
         },
       });
 

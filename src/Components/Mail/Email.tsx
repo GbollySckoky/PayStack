@@ -2,6 +2,8 @@
 'use client';
 import React, { useState } from 'react';
 import PaystackPop from '@paystack/inline-js';
+import { toast } from 'react-toastify';
+
 
 const Email = () => {
     const [formData, setFormData] = useState({
@@ -72,7 +74,7 @@ const Email = () => {
                         
                         if (verifyResponse.ok) {
                             // Payment verified successfully
-                            console.log('Payment verification successful:', verifyData);
+                            toast.success(verifyData.message);
                             setIsVerified(true);
                         } else {
                             // Handle verification error
@@ -85,22 +87,23 @@ const Email = () => {
                     },
                     onError() {
                         console.error('Payment error');
-                        setIsError('Payment error occurred. Please try again.');
+                        toast.error('Payment error occurred. Please try again.');
                     },
                 });
             } else {
-                setIsError(data.message || 'Payment initiation failed');
+                toast.error(data.message || 'Payment initiation failed');
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            setIsError('An error occurred while processing your request.');
+            toast.error('An error occurred while processing your request.');
         } finally {
             setIsLoading(false);
         }
     };
 
     return (
-        <div className="bg-blue-800">
+        <div className="bg-blue-800 h-screen">
+            <h1 className='mb-[10px] pt-[30px] text-center text-[30px] text-white font-medium'>PAYSTACK GATEWAY PAYMENT LOGIC IMPLEMENTATION</h1>
             <form className='p-5 w-[50%] mx-auto' onSubmit={handleApprovePaystack}>
                 <div className='flex flex-col'>
                     <label className='text-white'>Email</label>
@@ -150,7 +153,7 @@ const Email = () => {
                     {isLoading ? 'Processing...' : 'Pay'}
                 </button>
                 {isError && <p className="text-red-500">{isError}</p>}
-                {isVerified && <p className="text-green-500">Payment verified successfully!</p>}
+                {/* {isVerified && <p className="text-green-500">Payment verified successfully!</p>} */}
             </form>
         </div>
     );
